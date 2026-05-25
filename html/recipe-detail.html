@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe detail</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script type="module" src="../js/main.js" defer></script>
+</head>
+<body>
+    <header>
+        <a class="logo transition-link" href="../index.html" aria-label="TastyBites Home">
+            <span class="logo-icon"><i class="fa-solid fa-bowl-food"></i></span>
+            <span class="logo-text">TastyBites</span>
+        </a>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Нүүр</a></li>
+                <li><a href="recipes.html" class="active">Жорууд</a></li>
+            </ul>
+        </nav>
+        <div class="header-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Хоол хайх..." data-search-input>
+        </div>
+        <div class="header-right">
+            <i class="fa-regular fa-heart header-fav" onclick="location.href='recipes.html?favorites=1'" title="Хадгалсан"></i>
+            <button class="login" onclick="location.href='../index.html?openLogin=1'">Нэвтрэх</button>
+        </div>
+        <button class="hamburger"><i class="fa-solid fa-bars"></i></button>
+    </header>
+    <div class="mobile-search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Хоол хайх..." data-search-input>
+    </div>
+
+    <div class="detail-back">
+        <a href="recipes.html"><i class="fa-solid fa-chevron-left"></i> Жорууд руу буцах</a>
+    </div>
+
+    <main class="recipe-detail" id="recipeDetailContainer"></main>
+
+    <footer></footer>
+    <nav class="bottom-nav">
+        <a href="../index.html"><i class="fa-solid fa-house"></i><span>Нүүр</span></a>
+        <a href="recipes.html"><i class="fa-solid fa-book-open"></i><span>Жорууд</span></a>
+        <a href="recipes.html?favorites=1"><i class="fa-solid fa-heart"></i><span>Хадгалсан</span></a>
+        <a href="membership.html"><i class="fa-solid fa-user"></i><span>Профайл</span></a>
+    </nav>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="mn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Жорууд</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script type="module" src="../js/main.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <a class="logo transition-link" href="../index.html" aria-label="TastyBites Home">
+            <span class="logo-icon"><i class="fa-solid fa-bowl-food"></i></span>
+            <span class="logo-text">TastyBites</span>
+        </a>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Нүүр</a></li>
+                <li><a href="recipes.html" class="active">Жорууд</a></li>
+            </ul>
+        </nav>
+        <div class="header-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Хоол хайх..." data-search-input>
+        </div>
+        <div class="header-right">
+            <i class="fa-regular fa-heart header-fav" onclick="location.href='recipes.html?favorites=1'" title="Хадгалсан"></i>
+            <button class="login" onclick="location.href='../index.html?openLogin=1'">Нэвтрэх</button>
+        </div>
+        <button class="hamburger"><i class="fa-solid fa-bars"></i></button>
+    </header>
+    <div class="mobile-search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Хоол хайх..." data-search-input>
+    </div>
+
+    <main>
+        <div class="section-header recipes-title">
+            <h3>Бүх жорууд</h3>
+            <span id="recipeResultCount" hidden>100 жор харагдаж байна</span>
+        </div>
+
+        <section class="category-selection">
+            <div class="filter-row">
+                <div class="filter-left">
+                    <span>Төрөл</span>
+                    <button class="filter-btn active" data-category="All">Бүгд</button>
+                    <button class="filter-btn" data-category="Breakfast">Өглөөний хоол</button>
+                    <button class="filter-btn" data-category="Lunch">Өдрийн хоол</button>
+                    <button class="filter-btn" data-category="Dinner">Оройн хоол</button>
+                    <button class="filter-btn" data-category="Dessert">Амттан</button>
+                    <button class="filter-btn" data-category="Healthy">Эрүүл</button>
+                    <button class="filter-btn" data-category="Soup">Шөл</button>
+                    <button class="filter-btn" data-category="Snack">Зууш</button>
+                    <button class="filter-btn" data-category="Traditional">Уламжлалт</button>
+                </div>
+                <div class="filter-right">
+                    <span>Эрэмбэ</span>
+                    <select class="sort-select" id="sortSelect">
+                        <option value="Default">-</option>
+                        <option value="A-Z">А-Я</option>
+                        <option value="Z-A">Я-А</option>
+                        <option value="RatingDesc">Үнэлгээ ихээс</option>
+                        <option value="RatingAsc">Үнэлгээ багаас</option>
+                        <option value="Newest">Шинэ</option>
+                        <option value="Oldest">Хуучин</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <section class="recipes-list" id="recipesList"></section>
+        <section class="pagination-wrap" id="paginationWrap"></section>
+    </main>
+    <footer></footer>
+    <nav class="bottom-nav">
+        <a href="../index.html"><i class="fa-solid fa-house"></i><span>Нүүр</span></a>
+        <a href="recipes.html" class="active"><i class="fa-solid fa-book-open"></i><span>Жорууд</span></a>
+        <a href="recipes.html?favorites=1"><i class="fa-solid fa-heart"></i><span>Хадгалсан</span></a>
+        <a href="membership.html"><i class="fa-solid fa-user"></i><span>Профайл</span></a>
+    </nav>
+</body>
+
+</html>

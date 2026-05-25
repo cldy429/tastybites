@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="mn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TastyBites - Амтат жорын сан</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script type="module" src="js/main.js" defer></script>
+</head>
+
+<body class="page-ready">
+    <header>
+        <a class="logo transition-link" href="index.html" aria-label="TastyBites Home">
+            <span class="logo-icon"><i class="fa-solid fa-bowl-food"></i></span>
+            <span class="logo-text">TastyBites</span>
+        </a>
+        
+        <nav>
+            <ul>
+                <li><a href="index.html" class="active">Нүүр</a></li>
+                <li><a href="html/recipes.html">Жорууд</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Хоол хайх..." data-search-input>
+        </div>
+
+        <div class="header-right">
+            <i class="fa-regular fa-heart header-fav" onclick="location.href='html/recipes.html?favorites=1'" title="Хадгалсан"></i>
+            <button class="login" onclick="openLoginModel()">Нэвтрэх</button>
+        </div>
+
+        <!-- mobile heseg -->
+        <button class="hamburger" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </header>
+
+    <div class="mobile-search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Хоол хайх..." data-search-input>
+    </div>
+
+    <main>
+        <section class="hero">
+            <div class="hero-text">
+                <span class="hero-badge">Шилдэг тогооч нарын нууц</span>
+                <h1>Өдөр бүрийн <span>амтат</span> жорыг эндээс</h1>
+                <p>Таны гал тогоонд шинэ өнгө төрх нэмэх хамгийн хялбар бөгөөд амттай хоолны жоруудын цуглуулга.</p>
+                
+                <div class="hero-buttons">
+                    <button class="primary" onclick="location.href='html/recipes.html'">Жорууд үзэх</button>
+                    <button class="secondary" onclick="location.href='html/recipes.html?category=Healthy'">Эрүүл сонголтууд</button>
+                </div>
+
+                
+                <article class="hero-stats" id="heroStats"></article>
+            </div>
+            <div class="hero-image-wrap">
+                <img src="images/hero-food.png" alt="Tasty Food">
+            </div>
+        </section>
+
+        <section class="featured">
+            <div class="section-header section-flex">
+                <div>
+                    <h3>Онцлох жорууд</h3>
+                    <span>Хамгийн их эрэлттэй байгаа хоолнууд</span>
+                </div>
+                <button class="admin-secondary" onclick="location.href='html/recipes.html'">Бүгдийг үзэх</button>
+            </div>
+            <div class="features" id="featuredRecipes">
+                
+            </div>
+        </section>
+
+        <section class="category-browse">
+            <div class="section-header">
+                <h2>Төрлөөр нь үзэх</h2>
+                <p class="category-sub">Өөрийн сонирхож буй хоолны төрлөө сонгоно уу</p>
+            </div>
+            <div class="categories" id="categoryList">
+                
+            </div>
+        </section>
+
+        <section class="popular">
+            <div class="section-header">
+                <h3>Энэ долоо хоногийн хамгийн эрэлттэй</h3>
+            </div>
+            <div class="populars" id="popularRecipes">
+                
+            </div>
+        </section>
+
+        <button class="last-button" onclick="location.href='html/recipes.html'">Илүү олон жор үзэх</button>
+    </main>
+
+    <div id="loginModel" class="model">
+        <div class="model-content">
+            <span class="close-button" onclick="closeLoginModel()">&times;</span>
+            <div class="model-header">
+                <h2>Нэвтрэх</h2>
+                <p>TastyBites-д тавтай морилно уу</p>
+            </div>
+            <form id="LoginForm" onsubmit="handleLogin(event)">
+                <div class="inputs">
+                    <label>Цахим шуудан</label>
+                    <input type="email" name="email" placeholder="example@mail.com" required>
+                </div>
+                <div class="inputs">
+                    <label>Нууц үг</label>
+                    <input type="password" name="password" placeholder="********" required>
+                </div>
+                <button type="submit" class="enter-button">Нэвтрэх</button>
+                <p class="auth-error" data-login-error hidden></p>
+            </form>
+            <div class="model-footer">
+                <p>Шинэ хэрэглэгч үү? <a href="html/membership.html" class="transition-link">Бүртгүүлэх</a></p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <div class="logo">
+                    <span class="logo-icon"><i class="fa-solid fa-bowl-food"></i></span>
+                    <span class="logo-text">TastyBites</span>
+                </div>
+                <p>Бид танд хамгийн шилдэг хоолны жоруудыг хялбар бөгөөд ойлгомжтой байдлаар хүргэж байна.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Тусламж</h4>
+                <a href="#">Хэрэглэх заавар</a>
+                <a href="#">Холбоо барих</a>
+            </div>
+            <div class="footer-links">
+                <h4>Админ</h4>
+                <a href="html/admin.html">Админ панел</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 TastyBites. Бүх эрх хуулиар хамгаалагдсан.</p>
+        </div>
+    </footer>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="active"><i class="fa-solid fa-house"></i><span>Нүүр</span></a>
+        <a href="html/recipes.html"><i class="fa-solid fa-book-open"></i><span>Жорууд</span></a>
+        <a href="html/recipes.html?favorites=1"><i class="fa-solid fa-heart"></i><span>Хадгалсан</span></a>
+        <a href="html/membership.html"><i class="fa-solid fa-user"></i><span>Профайл</span></a>
+    </nav>
+</body>
+
+</html>
