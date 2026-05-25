@@ -3,6 +3,7 @@ import { initHomePage } from './pages/homePage.js';
 import { initRecipesPage } from './pages/recipesPage.js';
 import { initRecipeDetailPage } from './pages/recipeDetailPage.js';
 import { initAdminPage } from './pages/adminPage.js';
+import { initProfilePage } from './pages/profilePage.js';
 
 const recipeService = new RecipeService();
 const transitionDelay = 650;
@@ -62,7 +63,7 @@ async function handleLogin(event) {
         closeLoginModel();
 
         if (data.role === 'admin') {
-            window.location.href = 'html/admin.html';
+            window.location.href = 'html/profile.html';
             return;
         }
 
@@ -140,8 +141,8 @@ function getDrawerLinks() {
     const homeHref = isInHtmlFolder ? '../index.html' : 'index.html';
     const recipesHref = isInHtmlFolder ? 'recipes.html' : 'html/recipes.html';
     const favoritesHref = isInHtmlFolder ? 'recipes.html?favorites=1' : 'html/recipes.html?favorites=1';
-    const profileHref = isInHtmlFolder ? 'membership.html' : 'html/membership.html';
-    const adminHref = isInHtmlFolder ? 'admin.html' : 'html/admin.html';
+    const profileHref = isInHtmlFolder ? 'profile.html' : 'html/profile.html';
+    const adminHref = isInHtmlFolder ? 'profile.html' : 'html/profile.html';
     const user = getCurrentUser();
     const links = [
         { href: homeHref, label: 'Нүүр', icon: 'fa-house' },
@@ -149,10 +150,6 @@ function getDrawerLinks() {
         { href: favoritesHref, label: 'Хадгалсан', icon: 'fa-heart' },
         { href: profileHref, label: 'Профайл', icon: 'fa-user' }
     ];
-
-    if (user?.role === 'admin') {
-        links.push({ href: adminHref, label: 'Admin', icon: 'fa-user-shield' });
-    }
 
     return links;
 }
@@ -165,7 +162,8 @@ function getPagePaths() {
         recipes: isInHtmlFolder ? 'recipes.html' : 'html/recipes.html',
         favorites: isInHtmlFolder ? 'recipes.html?favorites=1' : 'html/recipes.html?favorites=1',
         healthy: isInHtmlFolder ? 'recipes.html?category=Healthy' : 'html/recipes.html?category=Healthy',
-        membership: isInHtmlFolder ? 'membership.html' : 'html/membership.html'
+        membership: isInHtmlFolder ? 'profile.html' : 'html/profile.html',
+        profile: isInHtmlFolder ? 'profile.html' : 'html/profile.html'
     };
 }
 
@@ -215,7 +213,7 @@ function updateAuthUI() {
 
     document.querySelectorAll('.login').forEach((button) => {
         if (user) {
-            button.textContent = user.role === 'admin' ? 'Админ гарах' : 'Гарах';
+            button.textContent = 'Гарах';
             button.onclick = logout;
             return;
         }
@@ -223,34 +221,28 @@ function updateAuthUI() {
         button.textContent = 'Нэвтрэх';
     });
 
+    const isInHtmlFolder = window.location.pathname.replace(/\\/g, '/').includes('/html/');
+
     document.querySelectorAll('.header-right').forEach((container) => {
-        const existingAdminLink = container.querySelector('.admin-header-link');
-        if (user?.role !== 'admin') {
-            existingAdminLink?.remove();
-            return;
+        // Profile link
+        const existingProfileLink = container.querySelector('.profile-header-link');
+        if (user && !existingProfileLink) {
+            const profileLink = document.createElement('a');
+            profileLink.className = 'profile-header-link transition-link';
+            profileLink.href = isInHtmlFolder ? 'profile.html' : 'html/profile.html';
+            profileLink.innerHTML = '<i class="fa-solid fa-user"></i>';
+            profileLink.title = user.name;
+            container.insertBefore(profileLink, container.querySelector('.login'));
+        }
+        if (!user && existingProfileLink) {
+            existingProfileLink.remove();
         }
 
-        if (existingAdminLink) return;
-
-        const link = document.createElement('a');
-        link.className = 'admin-header-link transition-link';
-        link.href = window.location.pathname.replace(/\\/g, '/').includes('/html/')
-            ? 'admin.html'
-            : 'html/admin.html';
-        link.innerHTML = '<i class="fa-solid fa-user-shield"></i><span>Admin</span>';
-        container.insertBefore(link, container.querySelector('.login'));
     });
 }
 
 function protectAdminPage() {
-    const isAdminPage = window.location.pathname.replace(/\\/g, '/').endsWith('/html/admin.html');
-    if (!isAdminPage) return true;
-
-    const user = getCurrentUser();
-    if (user?.role === 'admin') return true;
-
-    window.location.href = '../index.html?openLogin=1';
-    return false;
+    return true;
 }
 
 function setupFavoriteButtons() {
@@ -458,6 +450,7 @@ async function initPage() {
     await initRecipesPage(recipeService);
     await initRecipeDetailPage(recipeService);
     await initAdminPage(recipeService);
+    await initProfilePage(recipeService);
 }
 
 function setupGlobalSearch(){

@@ -77,6 +77,15 @@ async function handleApi(req, res, url) {
     const route = url.pathname;
     const method = req.method;
 
+    if (method === 'OPTIONS') {
+        res.writeHead(204, {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        });
+        return res.end();
+    }
+
     if (method === 'GET' && route === '/api/recipes') {
         const recipes = await Recipe.find();
         return sendJson(res, 200, recipes.map(r => ({ ...r._doc, id: r._id })));
@@ -128,6 +137,30 @@ async function handleApi(req, res, url) {
 
         await recipe.save();
         return sendJson(res, 201, { ...recipe._doc, id: recipe._id });
+    }
+
+    // --- Profile API: хэрэглэгчийн сэтгэгдлүүд ---
+    if (method === 'GET' && route === '/api/user/comments') {
+        const name = url.searchParams.get('name');
+        if (!name) return sendJson(res, 400, { error: 'Нэр шаардлагатай' });
+
+        const recipes = await Recipe.find({ 'comments.name': name });
+        const userComments = [];
+        recipes.forEach(r => {
+            r.comments.forEach(c => {
+                if (c.name === name) {
+                    userComments.push({
+                        recipeId: r._id,
+                        recipeTitle: r.title,
+                        recipeImage: r.image,
+                        comment: c.comment,
+                        rating: c.rating,
+                        createdAt: c.createdAt
+                    });
+                }
+            });
+        });
+        return sendJson(res, 200, userComments);
     }
 
     // --- Auth API ---

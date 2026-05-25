@@ -15,6 +15,9 @@ export async function initAdminPage(recipeService) {
     const adminRoot = document.getElementById('adminPanel');
     if (!adminRoot) return;
 
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+    if (!currentUser || currentUser.role !== 'admin') return;
+
     // --- Өгөгдөл хадгалах хувьсагчууд ---
     let recipes = [];
     let editingId = null;

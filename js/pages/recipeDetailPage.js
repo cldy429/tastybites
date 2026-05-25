@@ -103,10 +103,13 @@ export async function initRecipeDetailPage(recipeService) {
                         <strong>${ratingStats.average}</strong>
                     </div>
                     <form id="reviewForm">
-                        <label ${currentUser ? 'hidden' : ''}>
-                            <span>Нэр</span>
-                            <input type="text" name="name" maxlength="60" placeholder="Таны нэр" ${currentUser ? `value="${escapeHtml(currentUser.name)}"` : ''}>
-                        </label>
+                        ${currentUser
+                            ? `<input type="hidden" name="name" value="${escapeHtml(currentUser.name)}">`
+                            : `<label>
+                                <span>Нэр</span>
+                                <input type="text" name="name" maxlength="60" placeholder="Таны нэр">
+                            </label>`
+                        }
                         <label>
                             <span>Үнэлгээ</span>
                             <input type="hidden" name="rating" value="5">

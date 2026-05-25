@@ -1,4 +1,4 @@
-# tastybites
+# Food Recipe Web App
 
 ## Homepage Layout
 
@@ -12,5 +12,5 @@
 
 ## Recipe Detail Layout
 
-![Recipe Detail Layout](images/recipe-detail-layout.png)
+![Recipe Detail Layouyt](images/recipe-detail-layout.png)
 ---
